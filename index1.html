@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kartu Ucapan Ulang Tahun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Roboto', sans-serif;
+      overflow: hidden;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 400px;
+      animation: float 3s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+    .card h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff6f91;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    .card p {
+      font-size: 1.2em;
+      color: #555;
+      margin-bottom: 30px;
+    }
+    .card button {
+      background: #ff6f91;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .card button:hover {
+      background: #ff4e71;
+    }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    .hidden-content {
+      margin-top: 20px;
+      display: none;
+      animation: fadeIn 1s forwards;
+    }
+    .hidden-message {
+      font-size: 1.5em;
+      color: #ff6f91;
+      margin-bottom: 20px;
+    }
+    #slideshow img {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 10px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Selamat Ulang Tahun!</h1>
+  <p>Semoga hari spesial ini penuh kebahagiaan, cinta, dan semua impianmu jadi kenyataan!</p>
+  <button onclick="showSurprise()">Klik untuk Kejutan!</button>
+
+  <div id="hiddenContent" class="hidden-content">
+    <div class="hidden-message">We Love You! 🎉❤️</div>
+    <div id="slideshow">
+      <img src="https://source.unsplash.com/400x300/?birthday" id="slide" alt="Birthday Image">
+    </div>
+  </div>
+
+  <!-- Audio Element -->
+  <audio id="birthdaySong" src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3"></audio>
+</div>
+
+<script>
+function showSurprise() {
+  // Confetti meledak
+  confetti({
+    particleCount: 200,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
+
+  // Tampilkan konten tersembunyi
+  document.getElementById('hiddenContent').style.display = 'block';
+
+  // Mulai slideshow foto
+  let images = [
+    'https://source.unsplash.com/400x300/?birthday,cake',
+    'https://source.unsplash.com/400x300/?celebration',
+    'https://source.unsplash.com/400x300/?happy',
+    'https://source.unsplash.com/400x300/?gift'
+  ];
+  let current = 0;
+  setInterval(function() {
+    current = (current + 1) % images.length;
+    document.getElementById('slide').src = images[current];
+  }, 3000);
+
+  // Play lagu
+  var audio = document.getElementById('birthdaySong');
+  audio.play();
+}
+</script>
+
+</body>
+</html>
